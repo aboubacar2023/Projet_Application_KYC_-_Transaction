@@ -1,1 +1,5 @@
+# Ignore tous les fichiers dans uploads/
 uploads/*
+
+# Sauf le fichier .gitkeep
+!uploads/.gitkeep
