@@ -2,7 +2,7 @@
 CREATE DATABASE IF NOT EXISTS kyc_transactions;
 USE kyc_transactions;
 
--- Table 'clients' (principale)
+-- Table 'clients'
 CREATE TABLE clients (
     telephone VARCHAR(20) PRIMARY KEY,
     nom VARCHAR(50) NOT NULL,
@@ -12,7 +12,7 @@ CREATE TABLE clients (
     date_naissance DATE NOT NULL,
     mot_de_passe VARCHAR(255) NOT NULL, -- mot de passe crypté
     statut ENUM('en_attente', 'verifie_niv1', 'verifie_total', 'rejeté') DEFAULT 'en_attente',
-    solde DECIMAL(15, 2) DEFAULT 0.00,
+    solde INT DEFAULT 0,
     date_creation DATETIME DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
@@ -27,11 +27,11 @@ CREATE TABLE utilisateurs (
     role ENUM('agent1', 'agent2', 'commercial', 'admin') DEFAULT NULL
 ) ENGINE=InnoDB;
 
--- Table 'documents' (justificatifs clients)
+-- Table 'documents'
 CREATE TABLE documents (
     id INT AUTO_INCREMENT PRIMARY KEY,
     telephone_client VARCHAR(20) NOT NULL,
-    type_document VARCHAR(50) NOT NULL, -- CNI, passeport, etc.
+    type_document VARCHAR(50) NOT NULL,
     chemin_fichier VARCHAR(255) NOT NULL,
     date_upload DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (telephone_client) REFERENCES clients(telephone) ON DELETE CASCADE
@@ -49,14 +49,15 @@ CREATE TABLE verifications (
     FOREIGN KEY (id_agent) REFERENCES utilisateurs(id)
 ) ENGINE=InnoDB;
 
--- Table 'operations' (transactions financières)
+-- Table 'operations'
 CREATE TABLE operations (
     id INT AUTO_INCREMENT PRIMARY KEY,
     telephone_client VARCHAR(20) NOT NULL,
-    type_operation ENUM('depot', 'retrait', 'transfert_sortant', 'transfert_entrant') NOT NULL,
-    montant DECIMAL(15, 2) NOT NULL,
+    type_operation ENUM('depot', 'retrait', 'transfert_entrant', 'transfert_sortant') NOT NULL,
+    montant INT NOT NULL,
     id_commercial INT, -- NULL pour les transferts
     telephone_destinataire VARCHAR(20), -- seulement pour transferts
+    validation_operation BOOLEAN DEFAULT true,
     date_operation DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (telephone_client) REFERENCES clients(telephone),
     FOREIGN KEY (id_commercial) REFERENCES utilisateurs(id),

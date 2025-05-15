@@ -29,19 +29,23 @@ function registerClient() {
         // Création d'un nouveau nom de fichier conforme au client
         $extension = explode('.',$_FILES["document"]["name"])[1];
         $filenamefinal = trim($_POST["prenom"]).'_'.$_POST["nom"].'_'.$_POST["telephone"].'.'.$extension;
+        $type_document = $_POST['type_document'];
         
         // Verification du fichier
         $fichier_valide = array("jpg" => "image/jpg", "jpeg" => "image/jpeg", "png" => "image/png", "application/pdf" => "pdf");
         $filename = $_FILES["document"]["name"];
-        $filetype = $_FILES["document"]["type"];
         $filesize = $_FILES["document"]["size"];
         $ext = pathinfo($filename, PATHINFO_EXTENSION);
         if(!array_key_exists($ext, $fichier_valide)) {
-            return $message = 'Veuillez sélectionner un format de fichier valide (jpg, jpeg, png, pdf)';
+            $_SESSION['message'] = 'Veuillez sélectionner un format de fichier valide (jpg, jpeg, png, pdf)';
+            header('Location: ../views/register_client.php');
+            exit();
         };
         $maxsize = 2 * 1024 * 1024;
         if ($filesize > $maxsize) {
-            return $message = 'La taille du fichier est supérieure à la limite autorisée (2Mo maximum).';
+            $_SESSION['message'] = 'La taille du fichier est supérieure à la limite autorisée (2Mo maximum).';
+            header('Location: ../views/register_client.php');
+            exit();
         }
         
         // Création de l'utilisateur
@@ -70,7 +74,7 @@ function registerClient() {
         $insertion = $db->prepare($query);
         $insertion->execute([
             'telephone_client' => $telephone,
-            'type_document' => $extension,
+            'type_document' => $type_document,
             'chemin_fichier' => $filenamefinal,
         ]);
 

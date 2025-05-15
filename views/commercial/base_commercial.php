@@ -12,7 +12,7 @@ $user = $auth->getUser();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Client</title>
+    <title>Commercial</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
@@ -38,22 +38,6 @@ $user = $auth->getUser();
     }
     </script>
     <style>
-    .filter-btn {
-        margin-bottom: 8px;
-    }
-
-    .filter-btn.active {
-        color: hsl(221, 83.20%, 53.30%);
-        /* Blue-600 Tailwind */
-        font-weight: 600;
-        border-bottom: 6px solid hsl(221, 83.20%, 53.30%);
-    }
-
-    .filter-btn:hover {
-        color: #1d4ed8;
-        /* Blue-700 */
-    }
-
     .sidebar-item.active {
         background-color: rgba(79, 70, 229, 0.1);
         border-left: 4px solid #4f46e5;
@@ -92,17 +76,17 @@ $user = $auth->getUser();
                 <!-- Menu -->
                 <div class="flex flex-col flex-grow px-4 py-4 overflow-y-auto">
                     <nav class="space-y-1">
-                        <a href="/Projet_Application_KYC_&_Transaction/views/client/profil.php"
-                            class="sidebar-item <?= str_contains($url, 'profil') === true ? 'active' : ''  ?>  flex items-center px-4 py-3 rounded-lg">
-                            <i class="sidebar-icon fas fa-person mr-3 text-lg"></i>
-                            <span>Page de Profil</span>
+                        <a href="/Projet_Application_KYC_&_Transaction/views/commercial/depot.php"
+                            class="sidebar-item <?= str_contains($url, 'depot') === true ? 'active' : ''  ?>  flex items-center px-4 py-3 rounded-lg">
+                            <i class="sidebar-icon fas fa-money-bill-trend-up mr-3 text-lg"></i>
+                            <span>Les dépots</span>
                         </a>
-                        <a href="/Projet_Application_KYC_&_Transaction/views/client/transferts.php"
-                            class="sidebar-item <?= str_contains($url, 'transferts') === true ? 'active' : ''  ?> flex items-center px-4 py-3 rounded-lg">
+                        <a href="/Projet_Application_KYC_&_Transaction/views/commercial/retrait.php"
+                            class="sidebar-item <?= str_contains($url, 'retrait') === true ? 'active' : ''  ?>  flex items-center px-4 py-3 rounded-lg">
                             <i class="sidebar-icon fas fa-money-bill-transfer mr-3 text-lg"></i>
-                            <span>Transfert d’argent</span>
+                            <span>Les retraits</span>
                         </a>
-                        <a href="/Projet_Application_KYC_&_Transaction/views/client/historiques.php"
+                        <a href="/Projet_Application_KYC_&_Transaction/views/commercial/historiques.php"
                             class="sidebar-item <?= str_contains($url, 'historiques') === true ? 'active' : ''  ?> flex items-center px-4 py-3 rounded-lg">
                             <i class="sidebar-icon fas fa-file-alt mr-3 text-lg"></i>
                             <span>Historique des opérations</span>
@@ -140,30 +124,6 @@ $user = $auth->getUser();
             <?= $content ?>
         </div>
     </div>
-    <script>
-    const buttons = document.querySelectorAll('.filter-btn');
-    const tables = document.querySelectorAll('.content_attribut');
-
-    buttons.forEach(button => {
-        button.addEventListener('click', () => {
-            // Retirer l'état actif de tous les boutons
-            buttons.forEach(btn => btn.classList.remove('active'));
-
-            // Activer le bouton cliqué
-            button.classList.add('active');
-
-            // Recupere l'id cliqué
-            const btnId = button.id;
-            const suffix = btnId.replace('btn-', '');
-            tables.forEach(c => c.classList.add('hidden'));
-            const contentToShow = document.getElementById('content-' + suffix);
-            if (contentToShow) {
-                contentToShow.classList.remove('hidden');
-            }
-
-        });
-    });
-    </script>
 </body>
 
 </html>
