@@ -2,20 +2,30 @@
 require 'racine.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($auth->login($_POST['email'], $_POST['password'],$_POST['type'] )) {
-        switch ($_POST['type']) {
-            case 'clients':
-                header('Location: categories/categorie_index.php');
-                exit;
-                break;
-            
-            default:
-                header('Location: categories/categorie_index.php');
-                exit;
-                break;
+        if ($_POST['type'] === 'clients') {
+            header('Location: client/profil.php');
+            exit();
+        } else {
+            switch ($_SESSION['user']['role']) {
+                
+                case 'commercial':
+                    header('Location: commercial/depot.php');
+                    exit;
+                    break;
+                case 'admin':
+                    header('Location: admin/profil.php');
+                    exit;
+                    break;
+                default:
+                    header('Location: agent/client_liste.php');
+                    exit;
+                    break;
+            }
         }
+        
     } else {
-        if ($_SESSION['message']) {
-            $error = $_SESSION['message'];
+        if (isset($_SESSION['error'])) {
+            $error = $_SESSION['error'];
         } else {
             $error = "Nom d'utilisateur ou mot de passe incorrect.";
         }
@@ -35,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body class="bg-gray-100 dark:bg-gray-900 flex items-center justify-center h-screen">
     <form method="POST" class="bg-white dark:bg-gray-800 p-8 rounded shadow-md w-2/5">
         <h1 class="text-2xl mb-6 text-gray-900 dark:text-white">Connexion</h1>
-        <?php if (isset($message)) echo "<p class='text-red-500 pb-3'>$message</p>"; ?>
+        <?php if (isset($error)) echo "<p class='text-red-500 pb-3'>$error</p>"; ?>
         <?php if (isset($_SESSION['message'])) {
             echo '<p class="text-green-500 pb-3">' . htmlspecialchars($_SESSION['message']) . '</p>';
             unset($_SESSION['message']); // Supprime le message après l'affichage

@@ -10,20 +10,34 @@ class Auth
     }
     public function login($email, $password, $type)
     {
-        $password = hash('sha256', $password);
-        $query = "SELECT * FROM $type WHERE email = :email AND password = :password";
+        $mot_de_passe = hash('sha256', $password);
+        $query = "SELECT * FROM $type WHERE email = :email AND mot_de_passe = :mot_de_passe";
         $recuperation = $this->db->prepare($query);
         $recuperation->execute([
             'email'=>  $email, 
-            'password' => $password
+            'mot_de_passe' => $mot_de_passe
         ]);
         $data = $recuperation->fetch();
-        if ($data && $data['etat'] === 1) {
-            $_SESSION['user'] = $data;
-            return true;
-        }
-        if ($data['etat'] === 0) {
-            $_SESSION['error'] = "Cet utilisateur n'est pas active !!!";
+        // On verifie si l'utilisateur est active
+        switch ($type) {
+            case 'clients':
+                if (isset($data['statut']) && $data['statut'] === 'verifie_total') {
+                    $_SESSION['user'] = $data;
+                    return true;
+                } else {
+                    $_SESSION['error'] = "Votre demande d'incription est toujours en traitement !!!";
+                }
+                
+                break;
+            
+            default:
+                if (isset($data['validation_admin']) && $data['validation_admin'] === 1) {
+                    $_SESSION['user'] = $data;
+                    return true;
+                } else {
+                    $_SESSION['error'] = "Cet utilisateur n'est pas encore active !!!";
+                }
+                break;
         }
         return false;
     }
