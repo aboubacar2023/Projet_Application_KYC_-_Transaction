@@ -4,6 +4,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $url = $_SERVER["REQUEST_URI"];
+
 $user = $auth->getUser();
 ?>
 <!DOCTYPE html>
