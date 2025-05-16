@@ -76,17 +76,17 @@ $user = $auth->getUser();
                 <!-- Menu -->
                 <div class="flex flex-col flex-grow px-4 py-4 overflow-y-auto">
                     <nav class="space-y-1">
-                        <a href="/Projet_Application_KYC_&_Transaction/views/commercial/depot.php"
+                        <a href="/Projet_Application_KYC_Transaction/views/commercial/depot.php"
                             class="sidebar-item <?= str_contains($url, 'depot') === true ? 'active' : ''  ?>  flex items-center px-4 py-3 rounded-lg">
                             <i class="sidebar-icon fas fa-money-bill-trend-up mr-3 text-lg"></i>
                             <span>Les dépots</span>
                         </a>
-                        <a href="/Projet_Application_KYC_&_Transaction/views/commercial/retrait.php"
+                        <a href="/Projet_Application_KYC_Transaction/views/commercial/retrait.php"
                             class="sidebar-item <?= str_contains($url, 'retrait') === true ? 'active' : ''  ?>  flex items-center px-4 py-3 rounded-lg">
                             <i class="sidebar-icon fas fa-money-bill-transfer mr-3 text-lg"></i>
                             <span>Les retraits</span>
                         </a>
-                        <a href="/Projet_Application_KYC_&_Transaction/views/commercial/historiques.php"
+                        <a href="/Projet_Application_KYC_Transaction/views/commercial/historiques.php"
                             class="sidebar-item <?= str_contains($url, 'historiques') === true ? 'active' : ''  ?> flex items-center px-4 py-3 rounded-lg">
                             <i class="sidebar-icon fas fa-file-alt mr-3 text-lg"></i>
                             <span>Historique des opérations</span>

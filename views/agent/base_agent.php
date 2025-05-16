@@ -77,21 +77,16 @@ $niveau = preg_replace('/([a-z])(\d)/i', '$1 $2', $user['role']);
                 <!-- Menu -->
                 <div class="flex flex-col flex-grow px-4 py-4 overflow-y-auto">
                     <nav class="space-y-1">
-                        <a href="/Projet_Application_KYC_&_Transaction/views/agent/client_liste.php"
+                        <a href="/Projet_Application_KYC_Transaction/views/agent/client_liste.php"
                             class="sidebar-item <?= str_contains($url, 'client_liste') === true ? 'active' : ''  ?>  flex items-center px-4 py-3 rounded-lg">
                             <i class="sidebar-icon fas fa-person mr-3 text-lg"></i>
                             <span>Liste des Clients</span>
                         </a>
-                        <a href="/Projet_Application_KYC_&_Transaction/views/agent/client_histo.php"
+                        <a href="/Projet_Application_KYC_Transaction/views/agent/client_histo.php"
                             class="sidebar-item <?= str_contains($url, 'client_histo') === true ? 'active' : ''  ?> flex items-center px-4 py-3 rounded-lg">
                             <i class="sidebar-icon fas fa-file-alt mr-3 text-lg"></i>
                             <span>Historiques</span>
                         </a>
-                        <!-- <a href="/Projet_Application_KYC_&_Transaction/views/client/historiques.php"
-                            class="sidebar-item <?= str_contains($url, 'historiques') === true ? 'active' : ''  ?> flex items-center px-4 py-3 rounded-lg">
-                            <i class="sidebar-icon fas fa-file-alt mr-3 text-lg"></i>
-                            <span>Historique des opérations</span>
-                        </a> -->
                     </nav>
 
                     <div class="mt-auto mb-4 pt-4 border-t border-dark-300">
