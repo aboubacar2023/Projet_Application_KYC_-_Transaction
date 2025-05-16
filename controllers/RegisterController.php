@@ -79,7 +79,7 @@ function registerClient() {
         ]);
 
         // Enregistrement dans le dossier upload
-        move_uploaded_file($_FILES["document"]["tmp_name"], "../upload/" . $filenamefinal);
+        move_uploaded_file($_FILES["document"]["tmp_name"], "../uploads/" . $filenamefinal);
         
         $_SESSION['message'] = 'Votre demande à été soumise et est en attende de validation.'.
         

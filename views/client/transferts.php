@@ -4,7 +4,7 @@ session_start();
 require __DIR__ . '/../../controllers/AuthController.php';
 $auth = new Auth();
 
-if (!$auth->isLoggedIn()) {
+if (!$auth->isLoggedIn() || !$auth->verificationNiveau()) {
     header('Location: ../login.php');
     exit;
 }

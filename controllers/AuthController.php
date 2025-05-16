@@ -24,8 +24,14 @@ class Auth
                 if (isset($data['statut']) && $data['statut'] === 'verifie_total') {
                     $_SESSION['user'] = $data;
                     return true;
+                } elseif(empty($data)) {
+                    $_SESSION['error'] = "Email ou mot de passe incorrecte !!!";
                 } else {
-                    $_SESSION['error'] = "Votre demande d'incription est toujours en traitement !!!";
+                    if ($data['statut'] === 'rejeté') {
+                        $_SESSION['error'] = "Votre demande a été rejetée !!!";
+                    } else {
+                        $_SESSION['error'] = "Votre demande d'incription est toujours en traitement !!!";
+                    }
                 }
                 
                 break;
@@ -34,6 +40,8 @@ class Auth
                 if (isset($data['validation_admin']) && $data['validation_admin'] === 1) {
                     $_SESSION['user'] = $data;
                     return true;
+                } elseif(empty($data)) {
+                    $_SESSION['error'] = "Email ou mot de passe incorrecte !!!";
                 } else {
                     $_SESSION['error'] = "Cet utilisateur n'est pas encore active !!!";
                 }
@@ -46,12 +54,37 @@ class Auth
     {
         return isset($_SESSION['user']);
     }
+    // Verification pour les acces aux routes
+    public function verificationNiveau() {
+        // On regarde si c'est un client ou un utilisateur
+        if (isset($_SESSION['user']['role'])) {
+            $uri = $_SERVER['REQUEST_URI']; 
+            $afterViews = explode('/views/', $uri)[1];
+            $role = preg_replace('/[0-9]/', '', $_SESSION['user']['role']);
+            if (str_contains($afterViews, $role)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            $uri = $_SERVER['REQUEST_URI']; 
+            $afterViews = explode('/views/', $uri)[1];
+            $role = preg_replace('/[0-9]/', '', $_SESSION['user']['role']);
+            if (isset($_SESSION['user']['telephone'])) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        
+        
+    }
 
     public function logout()
     {
         session_destroy();
-        header('Location: /Projet_Application_KYC_&_Transaction/views/login.php');
-        exit;
+        header('Location: /views/login.php');
+        exit();
     }
     public function getUser()
     {

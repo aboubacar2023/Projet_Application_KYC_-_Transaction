@@ -93,17 +93,17 @@ $user = $auth->getUser();
                 <!-- Menu -->
                 <div class="flex flex-col flex-grow px-4 py-4 overflow-y-auto">
                     <nav class="space-y-1">
-                        <a href="/Projet_Application_KYC_Transaction/views/client/profil.php"
+                        <a href="/views/client/profil.php"
                             class="sidebar-item <?= str_contains($url, 'profil') === true ? 'active' : ''  ?>  flex items-center px-4 py-3 rounded-lg">
                             <i class="sidebar-icon fas fa-person mr-3 text-lg"></i>
                             <span>Page de Profil</span>
                         </a>
-                        <a href="/Projet_Application_KYC_Transaction/views/client/transferts.php"
+                        <a href="/views/client/transferts.php"
                             class="sidebar-item <?= str_contains($url, 'transferts') === true ? 'active' : ''  ?> flex items-center px-4 py-3 rounded-lg">
                             <i class="sidebar-icon fas fa-money-bill-transfer mr-3 text-lg"></i>
                             <span>Transfert d’argent</span>
                         </a>
-                        <a href="/Projet_Application_KYC_Transaction/views/client/historiques.php"
+                        <a href="/views/client/historiques.php"
                             class="sidebar-item <?= str_contains($url, 'historiques') === true ? 'active' : ''  ?> flex items-center px-4 py-3 rounded-lg">
                             <i class="sidebar-icon fas fa-file-alt mr-3 text-lg"></i>
                             <span>Historique des opérations</span>

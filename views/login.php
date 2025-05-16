@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     exit;
                     break;
                 case 'admin':
-                    header('Location: admin/profil.php');
+                    header('Location: admin/utilisateurs.php');
                     exit;
                     break;
                 default:
