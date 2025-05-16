@@ -31,14 +31,14 @@ Ce projet est une application web PHP (sans framework) de contrôle KYC (Know Yo
   🔄 Synchronisation entre clients et agents pour assurer la traçabilité.
 ## 🚀 Lancement du projet
 Il faudra au préalable avoir installé php (version 7 au minimum) et un environnement Apache & Mysql.
-## 1. Cloner le projet dans le htdocs (pour xampp par exemple) avec la commande : 
-    git clone https://github.com/aboubacar2023/Projet_Application_KYC-_Transaction.git
+## 1. Cloner le projet dans le htdocs (pour xampp par exemple sans le mettre dans un nouveau dossier) avec la commande : 
+    git clone https://github.com/aboubacar2023/Projet_Application_KYC_Transaction.git
 ## 2. Configurer la base de données :
     Exécuter la commande sql dans phpmyAdmin (le nom par défaut de la base de donnée est : kyc_transactions
 ## 3. Lancer un serveur local de Xampp (ou tout autre serveur utilisé)
 ## 4. Accéder à l’application : 
   interface de connection : 
-    http://localhost/Projet_Application_KYC_&_Transaction/views/login.php
+    http://localhost/Projet_Application_KYC_Transaction/views/login.php
 ## 🛠️ Technologies utilisées
   PHP (sans framework),
   MySQL,
