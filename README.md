@@ -36,9 +36,11 @@ Il faudra au préalable avoir installé php (version 7 au minimum) et un environ
 ## 2. Configurer la base de données :
   Exécuter la commande sql du fichier database.slq dans phpmyAdmin. Le nom par défaut de la base de donnée est : kyc_transactions (Ne le modifier pas).
 ## 3. Lancer un serveur local de Xampp (ou tout autre serveur utilisé)
+## 4. Se Placer dans le dossier racine du projet (là où il y a les fichiers .php) et excécuter la commande suivante :
+    php -S localhost:8000
 ## 4. Accéder à l’application : 
   interface de connection : 
-    http://localhost/Projet_Application_KYC_Transaction/views/login.php
+    http://localhost:8000/views/login.php
 ## 🛠️ Technologies utilisées
   PHP (sans framework),
   MySQL,
