@@ -4,7 +4,7 @@ session_start();
 require __DIR__ . '/../../controllers/AuthController.php';
 $auth = new Auth();
 
-if (!$auth->isLoggedIn()) {
+if (!$auth->isLoggedIn() || !$auth->verificationNiveau()) {
     header('Location: ../login.php');
     exit();
 }
@@ -72,7 +72,7 @@ $client = $query->fetch();
                 <div>
                     <h2 class="text-xl font-medium text-gray-100 mb-6">Document</h2>
                     <?php 
-                    $chemin = '../../upload/'.$client['chemin_fichier'];
+                    $chemin = '../../uploads/'.$client['chemin_fichier'];
                     if (file_exists($chemin)) {
                         // Ouvre le fichier en lecture
                         echo "<a href='$chemin' target='_blank' class='border rounded px-3 py-3 mb-6 hover:bg-gray-100 hover:text-black'>

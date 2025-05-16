@@ -13,7 +13,7 @@ $niveau = preg_replace('/([a-z])(\d)/i', '$1 $2', $user['role']);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agent</title>
+    <title>Administrateur</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
@@ -39,6 +39,13 @@ $niveau = preg_replace('/([a-z])(\d)/i', '$1 $2', $user['role']);
     }
     </script>
     <style>
+    .box {
+        background: rgba(79, 70, 229, 0.1);
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+
     .sidebar-item.active {
         background-color: rgba(79, 70, 229, 0.1);
         border-left: 4px solid #4f46e5;
@@ -77,15 +84,15 @@ $niveau = preg_replace('/([a-z])(\d)/i', '$1 $2', $user['role']);
                 <!-- Menu -->
                 <div class="flex flex-col flex-grow px-4 py-4 overflow-y-auto">
                     <nav class="space-y-1">
-                        <a href="/views/agent/client_liste.php"
-                            class="sidebar-item <?= str_contains($url, 'client') === true ? 'active' : ''  ?>  flex items-center px-4 py-3 rounded-lg">
+                        <a href="/views/admin/utilisateurs.php"
+                            class="sidebar-item <?= str_contains($url, 'utilisateur') === true ? 'active' : ''  ?>  flex items-center px-4 py-3 rounded-lg">
                             <i class="sidebar-icon fas fa-person mr-3 text-lg"></i>
-                            <span>Liste des Clients</span>
+                            <span>Les utilisateurs</span>
                         </a>
-                        <a href="/views/agent/client_histo.php"
-                            class="sidebar-item <?= str_contains($url, 'client_histo') === true ? 'active' : ''  ?> flex items-center px-4 py-3 rounded-lg">
+                        <a href="/views/admin/rapports.php"
+                            class="sidebar-item <?= str_contains($url, 'rapports') === true ? 'active' : ''  ?> flex items-center px-4 py-3 rounded-lg">
                             <i class="sidebar-icon fas fa-file-alt mr-3 text-lg"></i>
-                            <span>Historiques</span>
+                            <span>Les Rapports</span>
                         </a>
                     </nav>
 
