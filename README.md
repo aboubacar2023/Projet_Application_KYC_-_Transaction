@@ -34,7 +34,7 @@ Il faudra au préalable avoir installé php (version 7 au minimum) et un environ
 ## 1. Cloner le projet dans le htdocs (pour xampp par exemple sans le mettre dans un nouveau dossier) avec la commande : 
     git clone https://github.com/aboubacar2023/Projet_Application_KYC_Transaction.git
 ## 2. Configurer la base de données :
-    Exécuter la commande sql dans phpmyAdmin (le nom par défaut de la base de donnée est : kyc_transactions
+  Exécuter la commande sql du fichier database.slq dans phpmyAdmin. Le nom par défaut de la base de donnée est : kyc_transactions (Ne le modifier pas).
 ## 3. Lancer un serveur local de Xampp (ou tout autre serveur utilisé)
 ## 4. Accéder à l’application : 
   interface de connection : 
