@@ -60,8 +60,9 @@ class Auth
         if (isset($_SESSION['user']['role'])) {
             $uri = $_SERVER['REQUEST_URI']; 
             $afterViews = explode('/views/', $uri)[1];
+            $route_base = explode('/', $afterViews)[0];
             $role = preg_replace('/[0-9]/', '', $_SESSION['user']['role']);
-            if (str_contains($afterViews, $role)) {
+            if (str_contains($route_base, $role)) {
                 return true;
             } else {
                 return false;
@@ -69,8 +70,8 @@ class Auth
         } else {
             $uri = $_SERVER['REQUEST_URI']; 
             $afterViews = explode('/views/', $uri)[1];
-            $role = preg_replace('/[0-9]/', '', $_SESSION['user']['role']);
-            if (isset($_SESSION['user']['telephone'])) {
+            $route_base = explode('/', $afterViews)[0];
+            if (isset($_SESSION['user']['telephone']) && str_contains($route_base, 'client')) {
                 return true;
             } else {
                 return false;

@@ -55,7 +55,7 @@ $clients = $query->fetchAll();
                         <td class="px-6 py-4 whitespace-nowrap"><?= $client['nom']; ?></td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <div class="flex justify-end" style="padding-left: -30px;">
-                                <a href="client_indiv.php?id=<?= $client['telephone'] ?>">
+                                <a href="client_liste_indiv.php?id=<?= $client['telephone'] ?>">
                                     <button class="text-blue-400 hover:text-blue-500">
                                         <i class="fas fa-eye"></i>
                                     </button>

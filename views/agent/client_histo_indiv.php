@@ -12,7 +12,8 @@ $db = Database::getInstance()->getConnection();
 $telephone = $_GET['id'];
 // ID de l'utilisateur (l'agent)
 $id = $_SESSION['user']['id'];
-$sqlQuery = 'SELECT * FROM clients AS c
+$sqlQuery = 'SELECT telephone, c.prenom, c.nom, c.email, adresse, date_naissance, date_creation, type_document,
+    chemin_fichier,statut, commentaire, date_verification FROM clients AS c
     JOIN documents AS d ON c.telephone = d.telephone_client 
     JOIN verifications AS v ON c.telephone = v.telephone_client 
     JOIN utilisateurs AS u ON v.id_agent = u.id
@@ -80,7 +81,7 @@ $client = $query->fetch();
                 <div>
                     <h2 class="text-xl font-medium text-gray-100 mb-6">Document</h2>
                     <?php 
-                    $chemin = '../../upload/'.$client['chemin_fichier'];
+                    $chemin = '../../uploads/'.$client['chemin_fichier'];
                     if (file_exists($chemin)) {
                         // Ouvre le fichier en lecture
                         echo "<a href='$chemin' target='_blank' class='border rounded px-3 py-3 mb-6 hover:bg-gray-100 hover:text-black'>
