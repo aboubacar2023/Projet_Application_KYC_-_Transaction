@@ -46,4 +46,30 @@ Il faudra au préalable avoir installé php (version 7 au minimum) et un environ
   MySQL,
   HTML/CSS (avec Tailwind CSS),
   JavaScript,
+# API REST - Documentation
+  Cette API permet d’interagir avec les fonctionnalités principales du système KYC & Transactions.
+## 1. Enregistrement d’un client
+  URL: http://localhost:8000/API/clients/create.php || 
+  Type: form-data || 
+  champs requis: telephone, nom, prenom, email, adresse, date_naissance, mot_de_passe, type_document, document(image).
+## 2. Récupération d’un client
+  URL: http://localhost:8000/API/clients/show.php?id=90909090 (l'id correspond au contact du client)
+## 3. Historique d’un client
+  URL: http://localhost:8000/API/clients/operation.php?id=73963323 (l'id correspond au contact du client)
+## 4. Dépôt d’argent (Commercial)
+  URL: http://localhost:8000/API/commercials/depot.php || 
+  Type : JSON (raw) || 
+  champs requis : telephone, montant, id_commercial
+## 5. Retrait d’argent (Commercial)
+  URL: http://localhost:8000/API/commercials/retrait.php || 
+  Type : JSON (raw) || 
+  champs requis : telephone, montant, id_commercial
+## 6. Transfert d’argent entre clients
+  URL: http://localhost:8000/API/commercials/transfert.php ||
+  Type : JSON (raw) || 
+  champs requis : telephone_expediteur, telephone (Le destinateur), montant
+## NB : respecter à la lettre le nom des champs requis ainsi que les types de données à envoyer dans un environnement de test d'api
+  
+
+  
 
