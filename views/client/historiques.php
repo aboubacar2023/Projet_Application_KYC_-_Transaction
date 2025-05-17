@@ -42,12 +42,12 @@ $query->execute([
 ]);
 $retraits = $query->fetchAll();
 // transfert_entrant
-$sqlQuery = "SELECT telephone_client, c2.prenom, c2.nom, montant, date_operation 
+$sqlQuery = "SELECT telephone_client, c.prenom, c.nom, montant, date_operation 
     FROM clients AS c 
     JOIN operations AS o ON c.telephone = o.telephone_client
     JOIN clients AS c2 ON o.telephone_destinataire = c2.telephone
     WHERE telephone_destinataire = ?
-    AND type_operation = 'transfert_sortant' 
+    AND type_operation = 'transfert_entrant' 
     AND validation_operation = ?
 ";
 $query = $db->prepare($sqlQuery);
