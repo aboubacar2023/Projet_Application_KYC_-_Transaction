@@ -78,12 +78,12 @@ $niveau = preg_replace('/([a-z])(\d)/i', '$1 $2', $user['role']);
                 <div class="flex flex-col flex-grow px-4 py-4 overflow-y-auto">
                     <nav class="space-y-1">
                         <a href="/views/agent/client_liste.php"
-                            class="sidebar-item <?= str_contains($url, 'client') === true ? 'active' : ''  ?>  flex items-center px-4 py-3 rounded-lg">
+                            class="sidebar-item <?= str_contains($url, 'client_liste') === true ? 'active' : ''  ?>  flex items-center px-4 py-3 rounded-lg">
                             <i class="sidebar-icon fas fa-person mr-3 text-lg"></i>
                             <span>Liste des Clients</span>
                         </a>
                         <a href="/views/agent/client_histo.php"
-                            class="sidebar-item <?= str_contains($url, 'client_histo') === true ? 'active' : ''  ?> flex items-center px-4 py-3 rounded-lg">
+                            class="sidebar-item <?= str_contains($url, 'histo') === true ? 'active' : ''  ?> flex items-center px-4 py-3 rounded-lg">
                             <i class="sidebar-icon fas fa-file-alt mr-3 text-lg"></i>
                             <span>Historiques</span>
                         </a>

@@ -32,12 +32,12 @@ function registerClient() {
         $type_document = $_POST['type_document'];
         
         // Verification du fichier
-        $fichier_valide = array("jpg" => "image/jpg", "jpeg" => "image/jpeg", "png" => "image/png", "application/pdf" => "pdf");
+        $fichier_valide = array("jpg" => "image/jpg", "jpeg" => "image/jpeg", "png" => "image/png");
         $filename = $_FILES["document"]["name"];
         $filesize = $_FILES["document"]["size"];
         $ext = pathinfo($filename, PATHINFO_EXTENSION);
         if(!array_key_exists($ext, $fichier_valide)) {
-            $_SESSION['message'] = 'Veuillez sélectionner un format de fichier valide (jpg, jpeg, png, pdf)';
+            $_SESSION['message'] = 'Veuillez sélectionner un format de fichier valide (jpg, jpeg, png)';
             header('Location: ../views/register_client.php');
             exit();
         };

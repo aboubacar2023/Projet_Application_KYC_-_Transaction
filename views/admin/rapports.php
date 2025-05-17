@@ -11,10 +11,10 @@ if (!$auth->isLoggedIn() || !$auth->verificationNiveau()) {
 $db = Database::getInstance()->getConnection();
 
 // 1. Nombre total de clients
-$totalClients = $db->query("SELECT COUNT(*) FROM clients")->fetchColumn();
+$totalClients = $db->query("SELECT COUNT(*) FROM clients WHERE statut = 'verifie_total'")->fetchColumn();
 
 // 2. Nombre total d’utilisateurs
-$totalUsers = $db->query("SELECT COUNT(*) FROM utilisateurs")->fetchColumn();
+$totalUsers = $db->query("SELECT COUNT(*) FROM utilisateurs WHERE validation_admin = true")->fetchColumn();
 
 // 3. Nombre total de transactions
 $totalTransactions = $db->query("SELECT COUNT(*) FROM operations")->fetchColumn();
