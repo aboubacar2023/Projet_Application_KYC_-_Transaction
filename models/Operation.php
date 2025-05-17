@@ -7,7 +7,8 @@ class Operation{
         $this->pdo = $pdo;
     }
     public function depot() {
-        $telephone_receveur = trim($_POST['telephone']);
+        $data = json_decode(file_get_contents("php://input"), true);
+        $telephone_receveur = trim($data['telephone']);
         $sqlQuery = "SELECT * FROM clients WHERE telephone = :telephone AND statut = 'verifie_total'";
         $query = $this->pdo->prepare($sqlQuery);
         $query->execute([
@@ -15,8 +16,8 @@ class Operation{
         ]);
         $client = $query->fetch();
         if (!empty($client)) {
-            $id_commercial = $_POST['id_commercial'];
-            $montant = (int)$_POST['montant'];
+            $id_commercial = $data['id_commercial'];
+            $montant = (int)$data['montant'];
             $solde_client_reception = $client['solde'];
             if ($montant > 0) {
                 // montant à rajouter
@@ -44,7 +45,8 @@ class Operation{
         }
     }
     public function retrait() {
-        $telephone_acteur = trim($_POST['telephone']);
+        $data = json_decode(file_get_contents("php://input"), true);
+        $telephone_acteur = trim($data['telephone']);
         $sqlQuery = "SELECT * FROM clients WHERE telephone = :telephone AND statut = 'verifie_total'";
         $query = $this->pdo->prepare($sqlQuery);
         $query->execute([
@@ -52,9 +54,9 @@ class Operation{
         ]);
         $client = $query->fetch();
         if (!empty($client)) {
-            $id_commercial = $_POST['id_commercial'];
+            $id_commercial = $data['id_commercial'];
             $solde_acteur = $client['solde'];
-            $montant = (int)$_POST['montant'];
+            $montant = (int)$data['montant'];
             if ($solde_acteur >= $montant) {
                 // Dans la table intermediaire opérations pour le telephone_client
                 $sqlQuery3 = "INSERT INTO operations (telephone_client, type_operation, montant, id_commercial, validation_operation) VALUES (?, 'retrait', ?, ?, ?)";
@@ -75,24 +77,25 @@ class Operation{
     }
 
     public function transfert() {
-        $telephone_receveur = trim($_POST['telephone']);
+        $data = json_decode(file_get_contents("php://input"), true);
+        $telephone_receveur = trim($data['telephone']);
         $sqlQuery = "SELECT * FROM clients WHERE telephone = :telephone AND statut = 'verifie_total'";
         $query = $this->pdo->prepare($sqlQuery);
         $query->execute([
             'telephone' => $telephone_receveur
         ]);
         $client = $query->fetch();
-        if(!empty($client['telephone']) && $_POST['telephone_expediteur'] === $_POST['telephone']) {
+        if(!empty($client['telephone']) && $data['telephone_expediteur'] === $data['telephone']) {
             return "Vous ne pouvez pas vous transférer de l'argent !!!";
         } elseif (!empty($client)) {
             $sqlQuery = "SELECT solde FROM clients WHERE telephone = :telephone";
             $query = $this->pdo->prepare($sqlQuery);
             $query->execute([
-                'telephone' => $_POST['telephone_expediteur']
+                'telephone' => $data['telephone_expediteur']
             ]);
             $data = $query->fetch();
             $solde_acteur = $data['solde'];
-            $montant = (int)$_POST['montant'];
+            $montant = (int)$data['montant'];
             $solde_client_reception = $client['solde'];
             if ($solde_acteur >= $montant) {
                 // montant à rajouter
@@ -109,13 +112,13 @@ class Operation{
                 $query2 = $this->pdo->prepare($sqlQuery2);
                 $query2->execute([
                     'solde' => $new_montant,
-                    'telephone' => $_POST['telephone_expediteur']
+                    'telephone' => $data['telephone_expediteur']
                 ]);
                 // Dans la table intermediaire opérations pour le telephone_client
                 $sqlQuery3 = "INSERT INTO operations (telephone_client, type_operation, montant, telephone_destinataire) VALUES (?, 'transfert_sortant', ?, ?)";
                 $query3 = $this->pdo->prepare($sqlQuery3);
                 $query3->execute([
-                    $_POST['telephone_expediteur'],
+                    $data['telephone_expediteur'],
                     $montant,
                     $telephone_receveur
                 ]);
@@ -123,7 +126,7 @@ class Operation{
                 $sqlQuery3 = "INSERT INTO operations (telephone_client, type_operation, montant, telephone_destinataire) VALUES (?, 'transfert_entrant', ?, ?)";
                 $query3 = $this->pdo->prepare($sqlQuery3);
                 $query3->execute([
-                    $_POST['telephone_expediteur'],
+                    $data['telephone_expediteur'],
                     $montant,
                     $telephone_receveur
                 ]);
